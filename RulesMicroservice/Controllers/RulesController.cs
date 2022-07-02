@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RulesMicroservice.Models;
@@ -12,6 +13,7 @@ namespace RulesMicroservice.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RulesController : ControllerBase
     {
         IRulesRep db;
@@ -45,6 +47,7 @@ namespace RulesMicroservice.Controllers
         [Route("evaluateMinBal")]
         public IActionResult evaluateMinBal([FromBody] AccountCheck value)
         {
+            TokenInfo.StringToken = Request.Headers["Authorization"];
             try
             {
                 var obj = db.evaluateMinBal(value);

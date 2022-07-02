@@ -168,12 +168,12 @@ namespace AccountMicroservice.Repository
         {
             var accs = accountStatements.Find(a => a.AccountId == AccountId);
             var s = accs.Statements;
-            DateTime from = DateTime.ParseExact(from_date, "yyyy-mm-dd", CultureInfo.InvariantCulture);
-            DateTime to = DateTime.ParseExact(from_date, "yyyy-mm-dd", CultureInfo.InvariantCulture);
+            DateTime from = DateTime.ParseExact(from_date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            DateTime to = DateTime.ParseExact(to_date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             List<Statement> res = new List<Statement>();
             foreach (var n in s)
             {
-            if (true)
+            if (n.Date >= from && n.Date <= to)
                 {
                     res.Add(n);
                 }

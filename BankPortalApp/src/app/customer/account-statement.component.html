@@ -5,21 +5,21 @@
       
     <form (ngSubmit)="onAccountStatementSubmit(form.value)" #form="ngForm" action="post">
 
+      
       <label for="fname">Select your Account ID : </label>
-      <select name="AccountID" id="AccountID" ngModel>
-      <br>
-      <br>
-      <option *ngFor="let acc of customerAccounts" value="{{acc.accId}}">{{acc.accId}}</option>
+      <select name="AccountID" id="AccountID" required ngModel>
+        <option value="" disabled selected>Select Account Id</option>
+        <option *ngFor="let acc of customerAccounts" value="{{acc.accId}}" required >{{acc.accId}} - {{acc.accType}}</option>
       </select>
       <label for="fromdate"> From Date: </label>
-      <input type="date" id="fromdate" name="from_date" placeholder="Enter Date.." ngModel/>
+      <input type="date" id="fromdate" name="from_date" placeholder="Enter Date.." required ngModel/>
       <br>
       <br>  
       <label for="todate"> To Date: </label>
-      <input type="date" id="todate" name="to_date" placeholder="Enter Date.." ngModel/>
+      <input type="date" id="todate" name="to_date" placeholder="Enter Date.." required ngModel/>
       <br>
       <br>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Submit"  [disabled]="form.invalid">
     </form>
     <table *ngIf="accountStatements.length" class="table table-hover">
       <thead>

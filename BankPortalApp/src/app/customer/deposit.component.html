@@ -5,14 +5,15 @@
     <form (ngSubmit)="onDepositSubmit(form.value)" #form="ngForm" action="post">
       
       <label for="fname">Select your Account ID : </label>
-      <select name="AccountID" id="AccountID" ngModel>
-        <option *ngFor="let acc of customerAccounts" value="{{acc.accId}}">{{acc.accId}}</option>
+      <select name="AccountID" id="AccountID" required ngModel>
+        <option value="" disabled selected>Select Account Id</option>
+        <option *ngFor="let acc of customerAccounts" value="{{acc.accId}}" required >{{acc.accId}} - {{acc.accType}}</option>
       </select>
   
       <label for="lname">Enter the amount to be deposited : </label>
-      <input type="number" id="lname" name="Amount" placeholder="Amt in Rs.." ngModel/>
+      <input type="number" id="lname" name="Amount" placeholder="Amt in Rs.." required ngModel/>
     
-      <input type="submit" value="Deposit Money">
+      <input type="submit" value="Deposit Money" [disabled]="form.invalid">
     </form>
   </div>
   

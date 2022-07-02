@@ -2,9 +2,9 @@
 
 <div class="content">
     <form (ngSubmit)="onGetCustomerdetailsSubmit(form.value)" #form="ngForm" action="post">
-      <label for="empid">Enter your Employee ID : </label>
-      <input type="text" id="empid" name="EmployeeID" placeholder="Emp Id.." ngModel/>
-      <input type="submit" value="Submit">
+      <label for="empid">Enter Employee ID : </label>
+      <input type="text" id="empid" name="EmployeeID" placeholder="Emp Id.." required ngModel/>
+      <input type="submit" value="Submit" [disabled]="form.invalid">
     </form>
     <table *ngIf="userDetails"class="table table-hover">
           <tr>

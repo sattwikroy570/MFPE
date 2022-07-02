@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AccountMicroservice.Models;
 using AccountMicroservice.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -16,6 +17,7 @@ namespace AccountMicroservice.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AccountController : ControllerBase
     {
         IAccountRep db;
@@ -86,6 +88,8 @@ namespace AccountMicroservice.Controllers
         [Route("deposit")]
         public IActionResult deposit([FromBody] Transaction t)
         {
+
+            var StringToken = Request.Headers["Authorization"];
             try
             {
                 var ob = db.deposit(t);

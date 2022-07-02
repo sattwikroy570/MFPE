@@ -28,6 +28,8 @@ namespace RulesMicroservice.Repository
         {
             AccountMsg ob = new AccountMsg();
             RuleStatus ob1 = new RuleStatus();
+            string token = TokenInfo.StringToken;
+            client.DefaultRequestHeaders.Add("Authorization", token);
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Account/getAccount/" + value.AccountId).Result;
             if (response.IsSuccessStatusCode)
             {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TransactionMicroservice.Models;
@@ -16,6 +17,7 @@ namespace TransactionMicroservice.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TransactionController : ControllerBase
     {
        
@@ -28,6 +30,7 @@ namespace TransactionMicroservice.Controllers
         [Route("deposit")]
         public IActionResult deposit([FromBody]WithdrawDeposit value)
         {
+            TokenInfo.StringToken = Request.Headers["Authorization"];
             try
             {
                 var ob = db.deposit(value);
@@ -46,6 +49,7 @@ namespace TransactionMicroservice.Controllers
         [Route("withdraw")]
         public IActionResult withdraw([FromBody] WithdrawDeposit value)
         {
+            TokenInfo.StringToken = Request.Headers["Authorization"];
             try
             {
                 var ob = db.withdraw(value);
@@ -64,6 +68,7 @@ namespace TransactionMicroservice.Controllers
         [Route("transfer")]
         public IActionResult transfer([FromBody] Transfers value)
         {
+            TokenInfo.StringToken = Request.Headers["Authorization"];
             try
             {
                 var ob = db.transfer(value);

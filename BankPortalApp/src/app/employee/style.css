@@ -35,7 +35,7 @@ body {
     height: 1000px;
   }
 
-  input[type=text], select {
+  input[type=text],input[type=date], select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -60,3 +60,13 @@ body {
     background-color: #45a049;
   }
   
+input[type=submit]:disabled {
+  width: 100%;
+  background-color: #bbc7bc;
+  color: rgb(223, 223, 223);
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;  
+  cursor:default;
+}

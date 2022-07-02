@@ -28,6 +28,8 @@ namespace CustomerMicroservice.Repository
             customers.Add(customer);
             string data = JsonConvert.SerializeObject(new{ customerId = customer.CustomerId});
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            string token = TokenInfo.StringToken;
+            client.DefaultRequestHeaders.Add("Authorization", token);
             HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/createAccount/", content).Result;
             if (response.IsSuccessStatusCode)
             {

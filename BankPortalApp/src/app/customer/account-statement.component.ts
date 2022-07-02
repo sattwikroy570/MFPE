@@ -29,9 +29,10 @@ export class AccountStatementComponent implements OnInit {
   onAccountStatementSubmit(form:any){
     this.cust.getAccountStatement(+form.AccountID, form.to_date, form.from_date).subscribe((data:any)=>{
       this.accountStatements = data;
-      console.log(this.accountStatements);
+      if(!this.accountStatements.length){
+          this.flash.show("No data available", { cssClass: 'alert-danger', timeout: 10000 });
+      }
     }, (error)=> {
-      console.log(error)
       this.flash.show("Error! Sorry couldn't  complete your request", { cssClass: 'alert-danger', timeout: 10000 });
     });
   }

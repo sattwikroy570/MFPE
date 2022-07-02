@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using TransactionMicroservice.Models;
@@ -32,7 +33,10 @@ namespace TransactionMicroservice.Repository
             string data = JsonConvert.SerializeObject(dwacc);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = client.PostAsync(client2.BaseAddress + "/Account/Deposit/", content).Result;
+            string token = TokenInfo.StringToken;
+            client2.DefaultRequestHeaders.Add("Authorization", token);
+
+            HttpResponseMessage response = client2.PostAsync(client2.BaseAddress + "/Account/Deposit/", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 string data1 = response.Content.ReadAsStringAsync().Result;
@@ -49,6 +53,10 @@ namespace TransactionMicroservice.Repository
             string withdrawData = JsonConvert.SerializeObject(wAcc);
             StringContent withdrawContent = new StringContent(withdrawData, Encoding.UTF8, "application/json");
 
+
+            string token = TokenInfo.StringToken;
+            client.DefaultRequestHeaders.Add("Authorization", token);
+
             HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/Rules/evaluateMinBal/", withdrawContent).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -59,7 +67,9 @@ namespace TransactionMicroservice.Repository
                     msg.Message = "Warning";
                     return msg;
                 }
-                HttpResponseMessage response1 = client.PostAsync(client2.BaseAddress + "/Account/Withdraw/", withdrawContent).Result;
+
+                client2.DefaultRequestHeaders.Add("Authorization", token);
+                HttpResponseMessage response1 = client2.PostAsync(client2.BaseAddress + "/Account/Withdraw/", withdrawContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data1 = response1.Content.ReadAsStringAsync().Result;
@@ -71,7 +81,9 @@ namespace TransactionMicroservice.Repository
                     WithdrawDeposit dAcc = new WithdrawDeposit { AccountId = t.DestinationAccountId, Amount = t.Amount };
                     string depositData = JsonConvert.SerializeObject(dAcc);
                     StringContent depositContent = new StringContent(depositData, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response2 = client.PostAsync(client2.BaseAddress + "/Account/Deposit/", depositContent).Result;
+
+                    client2.DefaultRequestHeaders.Add("Authorization", token);
+                    HttpResponseMessage response2 = client2.PostAsync(client2.BaseAddress + "/Account/Deposit/", depositContent).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         string data2 = response2.Content.ReadAsStringAsync().Result;
@@ -91,6 +103,9 @@ namespace TransactionMicroservice.Repository
             string data = JsonConvert.SerializeObject(dwacc);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
+            string token = TokenInfo.StringToken;
+            client.DefaultRequestHeaders.Add("Authorization", token);
+
             HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/Rules/evaluateMinBal/", content).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -101,7 +116,9 @@ namespace TransactionMicroservice.Repository
                     msg.Message = "Warning";
                     return msg;
                 }
-                HttpResponseMessage response1 = client.PostAsync(client2.BaseAddress + "/Account/Withdraw/", content).Result;
+
+                client2.DefaultRequestHeaders.Add("Authorization", token);
+                HttpResponseMessage response1 = client2.PostAsync(client2.BaseAddress + "/Account/Withdraw/", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data2 = response1.Content.ReadAsStringAsync().Result;

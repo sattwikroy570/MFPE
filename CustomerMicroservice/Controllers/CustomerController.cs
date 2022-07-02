@@ -43,6 +43,7 @@ namespace CustomerMicroservice.Controllers
         [Route("createCustomer")]
         public IActionResult createCustomer([FromBody]CustomerDetails customer)
         {
+            TokenInfo.StringToken = Request.Headers["Authorization"];
             try
             {
                 var obj = db.createCustomer(customer);

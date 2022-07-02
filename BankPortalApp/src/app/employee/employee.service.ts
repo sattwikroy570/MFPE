@@ -20,7 +20,7 @@ export class EmployeeService {
   httpOptions = {headers : this.headers};
   
   getCustomerDetails(id:any){
-    return this.http.get("https://localhost:5001/Customer/"+id,this.httpOptions);
+    return this.http.get("https://localhost:5001/Customer/getDetails/"+id,this.httpOptions);
   }
   createCustomer(data:any){
     return this.http.post("https://localhost:5001/Customer/create",data,this.httpOptions);

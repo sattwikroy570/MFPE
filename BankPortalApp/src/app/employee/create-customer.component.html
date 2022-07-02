@@ -4,26 +4,26 @@
 <div class="content">
     <form (ngSubmit)="onCreateCustomerSubmit(form.value)" #form="ngForm" action="post">
       <label for="custid">Enter Customer ID : </label>
-      <input type="text" id="custid" name="custid" placeholder="Customer Id.." ngModel/>
+      <input type="text" id="custid" name="custid" placeholder="Customer Id.." required ngModel/>
 <br>
 <br>
   
       <label for="custname">Enter Customer name : </label>
-      <input type="text" id="custname" name="CustomerName" placeholder="Enter Customer name here.." ngModel/>
+      <input type="text" id="custname" name="CustomerName" placeholder="Enter Customer name here.." required ngModel/>
 <br>
 <br>
       <label for="custadd">Enter Customer Address : </label>
-      <input type="text" id="custadd" name="CustomerAddress" placeholder="Enter Customer address.." ngModel/>
+      <input type="text" id="custadd" name="CustomerAddress" placeholder="Enter Customer address.." required ngModel/>
 <br>
 <br>
       <label for="custdob">Enter Customer DOB : </label>
-      <input type="date" id="custdob" name="CustomerDOB" placeholder="Date of Birth.." ngModel/>
+      <input type="date" id="custdob" name="CustomerDOB" placeholder="Date of Birth.." required ngModel/>
 <br>
 <br>
       <label for="custpan">Enter Customer Pancard No. : </label>
-      <input type="text" id="custpan" name="CustomerPAN" placeholder="Pan Number.." ngModel/>
+      <input type="text" id="custpan" name="CustomerPAN" placeholder="Pan Number.." maxlength="10" minlength="10" required ngModel/>
 <br>
 <br>
-      <input type="submit" value="Submit Details">
+      <input type="submit" value="Submit Details" [disabled]="form.invalid">
     </form>
   </div>
