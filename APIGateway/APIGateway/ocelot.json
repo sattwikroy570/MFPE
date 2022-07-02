@@ -1,0 +1,124 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/Auth/",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44373
+        }
+      ],
+      "UpstreamPathTemplate": "/login",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Customer/getCustomerDetails/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44377
+        }
+      ],
+      "UpstreamPathTemplate": "/Customer/getDetails/{id}",
+      "UpstreamHttpMethod": [ "GET" ] //,
+      //,
+      //"AuthenticationOptions": {
+      //"AuthenticationProviderKey": "IdentityApiKey",
+      //"AllowedScopes": []
+    },
+    {
+      "DownstreamPathTemplate": "/api/Customer/createCustomer",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44377
+        }
+      ],
+      "UpstreamPathTemplate": "/Customer/create",
+      "UpstreamHttpMethod": [ "POST" ] //,
+      //"AuthenticationOptions": {
+      //"AuthenticationProviderKey": "IdentityApiKey",
+      //"AllowedScopes": []
+    },
+    {
+      "DownstreamPathTemplate": "/api/Account/getCustomerAccounts/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44379
+        }
+      ],
+      "UpstreamPathTemplate": "/Accounts/getCustomerAccounts/{id}",
+      "UpstreamHttpMethod": [ "GET" ] //"AuthenticationOptions": {
+      //"AuthenticationProviderKey": "IdentityApiKey",
+      //"AllowedScopes": []
+    },
+    {
+      "DownstreamPathTemplate": "/api/Account/getAccountStatement/{AccountId}/{from_date}/{to_date}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44379
+        }
+      ],
+      "UpstreamPathTemplate": "/Accounts/getStatement/{AccountId}/{from_date}/{to_date}",
+      "UpstreamHttpMethod": [ "GET" ] //"AuthenticationOptions": {
+      //"AuthenticationProviderKey": "IdentityApiKey",
+      //"AllowedScopes": []
+    },
+    {
+      "DownstreamPathTemplate": "/api/Transaction/Deposit",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44304
+        }
+      ],
+      "UpstreamPathTemplate": "/Transaction/Deposit",
+      "UpstreamHttpMethod": [ "POST" ] //,
+      //"AuthenticationOptions": {
+      //"AuthenticationProviderKey": "IdentityApiKey",
+      //"AllowedScopes": []
+    },
+    {
+      "DownstreamPathTemplate": "/api/Transaction/Withdraw",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44304
+        }
+      ],
+      "UpstreamPathTemplate": "/Transaction/Withdraw",
+      "UpstreamHttpMethod": [ "POST" ] //,
+      //"AuthenticationOptions": {
+      //"AuthenticationProviderKey": "IdentityApiKey",
+      //"AllowedScopes": []
+    },
+    {
+      "DownstreamPathTemplate": "/api/Transaction/Transfer",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44304
+        }
+      ],
+      "UpstreamPathTemplate": "/Transaction/Transfer",
+      "UpstreamHttpMethod": [ "POST" ] //,
+      //"AuthenticationOptions": {
+      //"AuthenticationProviderKey": "IdentityApiKey",
+      //"AllowedScopes": []
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5001"
+
+  }
+}

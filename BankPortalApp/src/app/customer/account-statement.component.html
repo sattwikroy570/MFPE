@@ -1,0 +1,44 @@
+<app-sidebar></app-sidebar>
+
+
+<div class="content">
+      
+    <form (ngSubmit)="onAccountStatementSubmit(form.value)" #form="ngForm" action="post">
+
+      <label for="fname">Select your Account ID : </label>
+      <select name="AccountID" id="AccountID" ngModel>
+      <br>
+      <br>
+      <option *ngFor="let acc of customerAccounts" value="{{acc.accId}}">{{acc.accId}}</option>
+      </select>
+      <label for="fromdate"> From Date: </label>
+      <input type="date" id="fromdate" name="from_date" placeholder="Enter Date.." ngModel/>
+      <br>
+      <br>  
+      <label for="todate"> To Date: </label>
+      <input type="date" id="todate" name="to_date" placeholder="Enter Date.." ngModel/>
+      <br>
+      <br>
+      <input type="submit" value="Submit">
+    </form>
+    <table *ngIf="accountStatements.length" class="table table-hover">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Narration</th>
+          <th>Deposit</th>
+          <th>Withdrawal</th>
+          <th>Closing Balance </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of accountStatements">
+          <td>{{s.date}}</td>
+          <td>{{s.narration}}</td>
+          <td>{{s.deposit}}</td>          
+          <td>{{s.withdrawal}}</td>
+          <td>{{s.closingBalance}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

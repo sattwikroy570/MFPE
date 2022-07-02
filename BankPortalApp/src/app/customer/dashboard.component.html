@@ -1,0 +1,26 @@
+<app-sidebar></app-sidebar>
+
+
+<div class="content">
+    <h2>Welcome to Dashboard, User : {{userName}} !</h2>
+    <p>You can do all transactions by clicking on links.</p>
+    <p>Thank you for using our online banking services.</p>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Account ID</th>
+          <th>Account Type</th>
+          <th>Balance </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let acc of customerAccounts">
+          <td>{{acc.accId}}</td>
+          <td>{{acc.accType}}</td>
+          <td>{{acc.accBal}}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+  </div>
+  

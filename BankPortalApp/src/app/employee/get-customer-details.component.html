@@ -1,0 +1,24 @@
+<emp-app-sidebar></emp-app-sidebar>
+
+<div class="content">
+    <form (ngSubmit)="onGetCustomerdetailsSubmit(form.value)" #form="ngForm" action="post">
+      <label for="empid">Enter your Employee ID : </label>
+      <input type="text" id="empid" name="EmployeeID" placeholder="Emp Id.." ngModel/>
+      <input type="submit" value="Submit">
+    </form>
+    <table *ngIf="userDetails"class="table table-hover">
+          <tr>
+            <th>Name</th><td>{{userDetails.name}}</td>
+          </tr>
+          <tr>
+            <th>Date of Birth</th><td>{{userDetails.dateOfBirth}}</td>
+          </tr>
+          <tr>
+            <th>Address</th><td>{{userDetails.address}}</td>
+          </tr>
+          <tr>
+            <th>Pan No.</th><td>{{userDetails.panNumber}}</td>
+          </tr>
+      </table>
+</div>
+  
