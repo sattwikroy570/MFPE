@@ -31,8 +31,10 @@ export class DepositComponent implements OnInit {
     var Account = {AccountId: +form.AccountID, Amount: form.Amount};
     this.cust.deposit(Account).subscribe((data:any)=>{
         this.flash.show("Acc ID : "+data.accountId + " " + data.message + " Balance : Rs." + data.balance, { cssClass: 'alert-success', timeout: 10000 });
-    },(error)=> {
-      this.flash.show("Error! Sorry couldn't  complete your request", { cssClass: 'alert-danger', timeout: 10000 });
+    } ,(err)=> {
+      for(let e in err.error.errors){
+            this.flash.show(err.error.errors[e], { cssClass: 'alert-danger', timeout: 10000 });
+          }
     });
   }
 

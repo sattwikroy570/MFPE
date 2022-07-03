@@ -10,7 +10,7 @@
       </select>
   
       <label for="lname">Enter the amount to be withdrawn :</label>
-      <input type="number" id="lname" name="Amount" placeholder="Amt in Rs.." required ngModel/>
+      <input type="number" id="lname" name="Amount" min="0" placeholder="Amt in Rs.." required ngModel/>
     
       <input type="submit" value="Withdraw Money" [disabled]="form.invalid">
     </form>

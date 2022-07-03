@@ -20,6 +20,8 @@ export class AccountStatementComponent implements OnInit {
   customerAccounts:any;
   accountStatements:any = [];
 
+  today:string = new Date().toLocaleDateString('en-CA') ;
+
   ngOnInit(): void {    
     this.userName = this.auth.getUserName();
     this.cust.getUserAccounts(this.userName).subscribe((data:any) => {

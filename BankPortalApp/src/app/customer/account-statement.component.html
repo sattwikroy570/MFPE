@@ -12,11 +12,11 @@
         <option *ngFor="let acc of customerAccounts" value="{{acc.accId}}" required >{{acc.accId}} - {{acc.accType}}</option>
       </select>
       <label for="fromdate"> From Date: </label>
-      <input type="date" id="fromdate" name="from_date" placeholder="Enter Date.." required ngModel/>
+      <input type="date" id="fromdate" name="from_date" max="{{today}}" placeholder="Enter Date.." required ngModel/>
       <br>
       <br>  
       <label for="todate"> To Date: </label>
-      <input type="date" id="todate" name="to_date" placeholder="Enter Date.." required ngModel/>
+      <input type="date" id="todate" name="to_date" max="{{today}}" placeholder="Enter Date.." required ngModel/>
       <br>
       <br>
       <input type="submit" value="Submit"  [disabled]="form.invalid">

@@ -14,7 +14,7 @@
       <input type="number" id="fname" name="destinationAccountID" placeholder="Acc Id.." ngModel/>
   
       <label for="lname">Enter the amount to be transfered : </label>
-      <input type="number" id="lname" name="Amount" placeholder="Amt in Rs.." required ngModel/>
+      <input type="number" id="lname" name="Amount" min="0" placeholder="Amt in Rs.." required ngModel/>
     
       <input type="submit" value="Transfer Money" [disabled]="form.invalid">
     </form>

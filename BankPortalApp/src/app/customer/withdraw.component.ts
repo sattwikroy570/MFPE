@@ -31,7 +31,7 @@ export class WithdrawComponent implements OnInit {
     var AccountID = {AccountId: +form.AccountID,Amount: form.Amount};
     this.cust.withdraw(AccountID).subscribe((data:any)=>{
       if(data.message != "Warning"){
-        if(data.message != "Inscufficient Balance"){          
+        if(data.message === "Inscufficient Balance"){          
           this.flash.show(data.message, { cssClass: 'alert-danger', timeout: 10000 });
         }
         else{          
@@ -41,8 +41,10 @@ export class WithdrawComponent implements OnInit {
       else{
         this.flash.show("Warning !! Minimum Balance should be Rs.500", { cssClass: 'alert-danger', timeout: 10000 });
       }
-    }, (error)=> {
-      this.flash.show("Error! Sorry couldn't  complete your request", { cssClass: 'alert-danger', timeout: 10000 });
+    }, (err)=> {
+      for(let e in err.error.errors){
+            this.flash.show(err.error.errors[e], { cssClass: 'alert-danger', timeout: 10000 });
+      }
     });
   }
 }

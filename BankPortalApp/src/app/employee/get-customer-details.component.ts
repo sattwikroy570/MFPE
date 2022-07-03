@@ -26,8 +26,8 @@ export class GetCustomerDetailsComponent implements OnInit {
         if(data){            
           this.userDetails = data;
         }
-      }, (error)=> {
-        this.flash.show("Error! Sorry couldn't  complete your request", { cssClass: 'alert-danger', timeout: 10000 });
+      },  (err)=> {
+              this.flash.show(err.error.title, { cssClass: 'alert-danger', timeout: 10000 });
       });
   }
 

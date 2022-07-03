@@ -36,8 +36,10 @@ export class TransferComponent implements OnInit {
       else{
         this.flash.show("Warning !! Minimum Balance should be Rs.500", { cssClass: 'alert-danger', timeout: 10000 });
       }
-    }, (error)=> {
-      this.flash.show("Error! Sorry couldn't  complete your request", { cssClass: 'alert-danger', timeout: 10000 });
+    }, (err)=> {
+      for(let e in err.error.errors){
+            this.flash.show(err.error.errors[e], { cssClass: 'alert-danger', timeout: 10000 });
+          }
     });
   }
 

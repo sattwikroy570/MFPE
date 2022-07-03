@@ -13,7 +13,7 @@ namespace CustomerMicroservice.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Employee")]
     public class CustomerController : ControllerBase
     {
         ICustomerRepository db;

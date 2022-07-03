@@ -17,7 +17,6 @@ namespace AccountMicroservice.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class AccountController : ControllerBase
     {
         IAccountRep db;
@@ -29,6 +28,7 @@ namespace AccountMicroservice.Controllers
         // GET api/<AccountController>/5
         [HttpGet]
         [Route("getCustomerAccounts/{id}")]
+        [Authorize(Roles = "Customer")]
         public IActionResult getCustomerAccounts(string id)
         {
             try
@@ -49,6 +49,7 @@ namespace AccountMicroservice.Controllers
         // POST api/<AccountController>
         [HttpPost]
         [Route("createAccount")]
+        [Authorize(Roles = "Employee")]
         public IActionResult createAccount([FromBody] CustomerId CId)
         {
             try
@@ -67,6 +68,7 @@ namespace AccountMicroservice.Controllers
         }
         [HttpGet]
         [Route("getAccount/{id}")]
+        [Authorize(Roles = "Customer")]
         public IActionResult getAccount(int id)
         {
             try
@@ -86,6 +88,7 @@ namespace AccountMicroservice.Controllers
         }
         [HttpPost]
         [Route("deposit")]
+        [Authorize(Roles = "Customer")]
         public IActionResult deposit([FromBody] Transaction t)
         {
 
@@ -106,6 +109,7 @@ namespace AccountMicroservice.Controllers
         }
         [HttpPost]
         [Route("withdraw")]
+        [Authorize(Roles = "Customer")]
         public IActionResult withdraw([FromBody] Transaction t)
         {
             try
@@ -124,6 +128,7 @@ namespace AccountMicroservice.Controllers
         }
         [HttpGet]
         [Route("getAccountStatement/{AccountId}/{from_date}/{to_date}")]
+        [Authorize(Roles = "Customer")]
         public IActionResult getAccountStatement(int AccountId, string from_date, string to_date)
         {
             try

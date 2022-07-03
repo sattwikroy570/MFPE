@@ -17,7 +17,7 @@ namespace TransactionMicroservice.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Customer")]
     public class TransactionController : ControllerBase
     {
        

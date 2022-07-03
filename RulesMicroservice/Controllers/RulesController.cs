@@ -13,7 +13,7 @@ namespace RulesMicroservice.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Customer")]
     public class RulesController : ControllerBase
     {
         IRulesRep db;

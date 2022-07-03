@@ -14,6 +14,7 @@ export class CreateCustomerComponent implements OnInit {
     private flash: FlashMessagesService
   ) { }
 
+
   ngOnInit(): void {
   }
 
@@ -26,8 +27,10 @@ export class CreateCustomerComponent implements OnInit {
       else{
         this.flash.show("Error couldn't create customer please try again later!", { cssClass: 'alert-danger', timeout: 10000 });
       }
-    }, (error)=> {
-      this.flash.show("Error! Sorry couldn't  complete your request", { cssClass: 'alert-danger', timeout: 10000 });
+    },  (err)=> {
+      for(let e in err.error.errors){
+            this.flash.show(err.error.errors[e], { cssClass: 'alert-danger', timeout: 10000 });
+          }
     });
   }
 
