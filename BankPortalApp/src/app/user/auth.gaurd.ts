@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate } from '@angular/router'
+import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router'
 import { FlashMessagesService } from 'flash-messages-angular';
 import { AuthService } from './auth.service';
 
@@ -16,17 +16,24 @@ export class AuthGaurd implements CanActivate {
 
         isLoggedin:boolean = false;
 
-    canActivate(){
+    canActivate(route: ActivatedRouteSnapshot) {
         this.auth.loggedIn().subscribe((value:boolean)=>{
            this.isLoggedin=value;
         });
         if(this.isLoggedin){
-            return true;
+            if(this.auth.getRole() == route.data['role']){
+                return true;
+            }
+            else{ 
+                console.log(this.auth.getRole,route.data['role']);                  
+                this.flash.show('Acess Denied.', { cssClass: 'alert-danger' } );
+                this.router.navigate(['']);
+                return false;
+            }
         } 
         else {
             this.flash.show('You must login first.', { cssClass: 'alert-danger' } );
             this.router.navigate(['/login']);
-        
         return false;
         }
     }

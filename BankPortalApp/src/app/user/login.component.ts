@@ -34,12 +34,18 @@ export class LoginComponent implements OnInit {
           }
           else{                   
             this.router.navigate(['employee/dashboard']);
-          }
+          }     
+      }
+    },(err)=>{
+      if(err.error.status = 401){
+        this.flash.show("Invalid Credentials", { cssClass: 'alert-danger', timeout: 10000 });
+      }
+      else{          
+      for(let e in err.error.errors){
+        this.flash.show(err.error.errors[e], { cssClass: 'alert-danger', timeout: 10000 });
         }
-        else{
-          this.flash.show('Unable to login! ', { cssClass: 'alert-danger' } );
-        }      
-      });
-    }
+      }
+    });
+  }
 
 }

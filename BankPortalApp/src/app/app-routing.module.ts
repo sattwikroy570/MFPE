@@ -14,14 +14,14 @@ import { AuthGaurd } from './user/auth.gaurd';
 
 const routes: Routes = [  
   { path: 'login', component: LoginComponent },
-  { path: 'customer/dashboard', component: DashboardComponent, canActivate: [AuthGaurd] },
-  { path: 'customer/deposit', component: DepositComponent, canActivate: [AuthGaurd] },
-  { path: 'customer/withdraw', component: WithdrawComponent , canActivate: [AuthGaurd] },
-  { path: 'customer/transfer', component: TransferComponent , canActivate: [AuthGaurd] },
-  { path: 'customer/accountStatement', component: AccountStatementComponent , canActivate: [AuthGaurd] },
-  { path: 'employee/dashboard', component: empDashboardComponent , canActivate: [AuthGaurd] },
-  { path: 'employee/createCustomer', component: CreateCustomerComponent , canActivate: [AuthGaurd] },
-  { path: 'employee/getCustomerDetails', component: GetCustomerDetailsComponent , canActivate: [AuthGaurd] },  
+  { path: 'customer/dashboard', component: DashboardComponent, canActivate: [AuthGaurd], data: {role : "Customer"} },
+  { path: 'customer/deposit', component: DepositComponent, canActivate: [AuthGaurd], data: {role : "Customer"}  },
+  { path: 'customer/withdraw', component: WithdrawComponent , canActivate: [AuthGaurd], data: {role : "Customer"}  },
+  { path: 'customer/transfer', component: TransferComponent , canActivate: [AuthGaurd], data: {role : "Customer"}  },
+  { path: 'customer/accountStatement', component: AccountStatementComponent , canActivate: [AuthGaurd], data: {role : "Customer"}  },
+  { path: 'employee/dashboard', component: empDashboardComponent , canActivate: [AuthGaurd], data: {role : "Employee"}  },
+  { path: 'employee/createCustomer', component: CreateCustomerComponent , canActivate: [AuthGaurd], data: {role : "Employee"} },
+  { path: 'employee/getCustomerDetails', component: GetCustomerDetailsComponent , canActivate: [AuthGaurd], data: {role : "Employee"} },  
   { path: '', component: HomeComponent },  
 ]
 

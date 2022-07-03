@@ -15,6 +15,7 @@ namespace AuthenticateMicroservice.Model
         public string Password { get; set; }
 
         [Required]
+        [RegularExpression("^Employee$|^Customer$", ErrorMessage = "Invalid Role")]
         public string Roles { get; set; }
     }
 }

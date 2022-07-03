@@ -14,6 +14,8 @@ export class CreateCustomerComponent implements OnInit {
     private flash: FlashMessagesService
   ) { }
 
+  
+  today:string = new Date().toLocaleDateString('en-CA') ;
 
   ngOnInit(): void {
   }
