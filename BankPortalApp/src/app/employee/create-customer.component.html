@@ -1,6 +1,5 @@
 <emp-app-sidebar></emp-app-sidebar>
 
-
 <div class="content">
     <form (ngSubmit)="onCreateCustomerSubmit(form.value)" #form="ngForm" action="post">
       <label for="custid">Enter Customer ID : </label>
@@ -21,7 +20,7 @@
 <br>
 <br>
       <label for="custpan">Enter Customer Pancard No. : </label>
-      <input type="text" id="custpan" name="CustomerPAN" placeholder="Pan Number.." maxlength="10" minlength="10" required ngModel/>
+      <input type="text" id="custpan" name="CustomerPAN" placeholder="Pan Number.." maxlength="10" minlength="10" (blur)="onPanBlur($event)" required ngModel/>
 <br>
 <br>
       <input type="submit" value="Submit Details" [disabled]="form.invalid">

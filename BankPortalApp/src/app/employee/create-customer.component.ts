@@ -20,6 +20,14 @@ export class CreateCustomerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
+  onPanBlur(event:any){
+    var value = (event.target as HTMLInputElement).value
+    if(value.length< 10){
+      this.flash.show("Enter valid Pan No", { cssClass: 'alert-danger', timeout: 5000 });
+    }
+  }
+
   onCreateCustomerSubmit(form:any){
     var customer = {CustomerId: form.custid,Name: form.CustomerName,Address: form.CustomerAddress,DateOfBirth: form.CustomerDOB,PanNumber: form.CustomerPAN};
     this.emp.createCustomer(customer).subscribe((data:any)=>{

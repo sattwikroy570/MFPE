@@ -26,6 +26,13 @@ export class WithdrawComponent implements OnInit {
       this.customerAccounts = data;
     });
   }
+  
+  onAmountBlur(event:any){
+    var value = (event.target as HTMLInputElement).value
+    if(+value< 0){
+      this.flash.show("Amount cannot be negative", { cssClass: 'alert-danger', timeout: 5000 });
+    }
+  }
 
   onWithdrawSubmit(form:any) {
     var AccountID = {AccountId: +form.AccountID,Amount: form.Amount};

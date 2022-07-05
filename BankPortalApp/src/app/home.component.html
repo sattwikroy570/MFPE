@@ -1,7 +1,17 @@
+<section class="hero">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to Retail Banking Portal</h1>
-    <p *ngIf="!isLoggedIn">Please <a href="/login">login</a> to continue.</p>
-    <p *ngIf="isLoggedIn && isEmployee">Go to <a href="/employee/dashboard">dashboard</a> to continue.</p>    
-    <p *ngIf="isLoggedIn && !isEmployee">Go to <a href="/customer/dashboard">dashboard</a> to continue.</p>
-</div>
+    <div class="hero-content">
+    
+       <h1 class="hero-title">
+            Welcome to Retail Banking Portal
+       </h1>
+         
+       <h4 class="hero-subtitle">
+            Click the button below to continue.
+       </h4>
+       <a *ngIf="!isLoggedIn" href="login" class="hero-button" > Log in</a>       
+       <a *ngIf="isLoggedIn && isEmployee" href="/employee/dashboard" class="hero-button">Go to Dashboard</a>
+       <a *ngIf="isLoggedIn && !isEmployee" href="/customer/dashboard" class="hero-button">Go to Dashboard</a>
+    </div>
+
+</section>
