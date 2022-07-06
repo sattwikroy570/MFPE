@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "i6vuyn+nqpDIvbI7uOaHAKXH964uT/d2KauuHrBX5EDskNmQAHTldP81/PcDZb4IkuMrZebqjS6T8qEcpL71yg==",
+  "dgSpecHash": "c7nOMl8PNA/auFgLPTDWqc7xHW4SIFI41pK76Gdq+bKptrdJrqQ1xB3oSEQzV8xIU4KW61SvErI/RAlJCpb9YQ==",
   "success": true,
-  "projectFilePath": "D:\\Work & Study\\MFPE\\APIGateway\\APIGateway\\APIGateway.csproj",
+  "projectFilePath": "D:\\Work & Study\\MFPE\\APIGateway\\APIGateway.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\BABIN\\.nuget\\packages\\fluentvalidation\\8.6.2\\fluentvalidation.8.6.2.nupkg.sha512",
     "C:\\Users\\BABIN\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
