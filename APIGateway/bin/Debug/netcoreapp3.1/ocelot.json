@@ -21,7 +21,7 @@
           "Port": 44377
         }
       ],
-      "UpstreamPathTemplate": "/Customer/getDetails/{id}",
+      "UpstreamPathTemplate": "q{id}",
       "UpstreamHttpMethod": [ "GET" ] //,
       //,
       //"AuthenticationOptions": {

@@ -248,3 +248,10 @@ D:\Work & Study\MFPE\RulesTesting\bin\Debug\netcoreapp3.1\RulesMicroservice.dll
 D:\Work & Study\MFPE\RulesTesting\bin\Debug\netcoreapp3.1\RulesMicroservice.pdb
 D:\Work & Study\MFPE\RulesTesting\obj\Debug\netcoreapp3.1\RulesTesting.csproj.CopyComplete
 D:\Work & Study\MFPE\RulesTesting\obj\Debug\netcoreapp3.1\RulesTesting.genruntimeconfig.cache
+D:\Work & Study\MFPE\RulesTesting\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Work & Study\MFPE\RulesTesting\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Work & Study\MFPE\RulesTesting\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+D:\Work & Study\MFPE\RulesTesting\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+D:\Work & Study\MFPE\RulesTesting\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Work & Study\MFPE\RulesTesting\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+D:\Work & Study\MFPE\RulesTesting\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll

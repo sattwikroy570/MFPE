@@ -1,4 +1,5 @@
-﻿using AuthenticateMicroservice.Model;
+﻿using AuthenticateMicroservice.DB;
+using AuthenticateMicroservice.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -14,19 +15,16 @@ namespace AuthenticateMicroservice.Repository
     public class AuthRepository : IAuthRepository
     {
         private IConfiguration _config;
-        public AuthRepository(IConfiguration config)
+        AuthDbContext _context;
+        public AuthRepository(IConfiguration config, AuthDbContext context)
         {
             _config = config;
+            _context = context;
         }
-        public static List<UserCredentails> clientList = new List<UserCredentails>
-        {
-            new UserCredentails{UserName="Manager",Password="1234",Roles="Employee"},
-            new UserCredentails{UserName="JhonSmith",Password="0000",Roles="Customer"}
-        };
         public UserCredentails AuthenticateUser(UserCredentails creds)
         {
             UserCredentails user = null;
-            foreach (var client in clientList)
+            foreach (var client in _context.clientList)
             {
                 if (client.UserName == creds.UserName && client.Password == creds.Password && client.Roles == creds.Roles)
                 {

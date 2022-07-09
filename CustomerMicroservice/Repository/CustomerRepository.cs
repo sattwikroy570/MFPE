@@ -1,4 +1,5 @@
-﻿using CustomerMicroservice.Models;
+﻿using CustomerMicroservice.DB;
+using CustomerMicroservice.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -12,20 +13,18 @@ namespace CustomerMicroservice.Repository
 {
     public class CustomerRepository : ICustomerRepository
     {
-        public static List<CustomerDetails> customers = new List<CustomerDetails>
-        {
-            new CustomerDetails{CustomerId = "JhonSmith",Name="Jhonathon Smith",Address="Dumdum",DateOfBirth="05-09-1997",PanNumber="CGLBP002"}
-        };
         Uri baseAddress = new Uri("https://localhost:44379/api/Account");
         HttpClient client;
-        public CustomerRepository()
+        CustomerDbContext _context;
+        public CustomerRepository(CustomerDbContext context)
         {
             client = new HttpClient();
             client.BaseAddress = baseAddress;
+            _context = context;
         }
         public CustomerAccountDetails createCustomer(CustomerDetails customer)
         {
-            customers.Add(customer);
+            _context.customers.Add(customer);
             string data = JsonConvert.SerializeObject(new{ customerId = customer.CustomerId});
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
             string token = TokenInfo.StringToken;
@@ -42,7 +41,7 @@ namespace CustomerMicroservice.Repository
 
         public CustomerDetails getCustomerDetails(string CustomerId)
         {
-            return customers.Where(c => c.CustomerId == CustomerId).FirstOrDefault();          
+            return _context.customers.Where(c => c.CustomerId == CustomerId).FirstOrDefault();          
         }
     }
 }

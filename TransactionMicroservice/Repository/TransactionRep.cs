@@ -82,7 +82,6 @@ namespace TransactionMicroservice.Repository
                     string depositData = JsonConvert.SerializeObject(dAcc);
                     StringContent depositContent = new StringContent(depositData, Encoding.UTF8, "application/json");
 
-                    client2.DefaultRequestHeaders.Add("Authorization", token);
                     HttpResponseMessage response2 = client2.PostAsync(client2.BaseAddress + "/Account/Deposit/", depositContent).Result;
                     if (response.IsSuccessStatusCode)
                     {

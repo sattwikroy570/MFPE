@@ -1,4 +1,4 @@
-﻿namespace CustomerMicroservice.Models
+﻿namespace CustomerMicroservice
 {
     public class TokenInfo
     {

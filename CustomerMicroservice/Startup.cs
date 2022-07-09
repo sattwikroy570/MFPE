@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CustomerMicroservice.DB;
 using CustomerMicroservice.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,6 +33,9 @@ namespace CustomerMicroservice
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<CustomerDbContext>(item => item.UseSqlServer(Configuration.GetConnectionString("conn")));
+
             services.AddSwaggerGen();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

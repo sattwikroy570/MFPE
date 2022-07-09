@@ -13,7 +13,7 @@ namespace TransactionMicroservice.Models
         public int AccountId { get; set; }
 
         [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Amount can not be negative!")]
-        public int Amount { get; set; }
+        [Range(1, double.MaxValue, ErrorMessage = "Amount can not be negative!")]
+        public double Amount { get; set; }
     }
 }

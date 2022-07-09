@@ -12,19 +12,10 @@ namespace CustomerTesting
 {
     public class Tests
     {
-        List<CustomerDetails> c1;
-
-        CustomerDetails customer =new CustomerDetails { CustomerId="DaneilKhan", Name="DK",Address="Dumdum",DateOfBirth="05-09-1997",PanNumber="CGLBP002"};
         [SetUp]
         public void Setup()
         {
-            c1 = new List<CustomerDetails>()
-            {
-                new CustomerDetails{CustomerId="JhonSmith", Name="Jonathan Smith",Address="Dumdum",DateOfBirth="05-09-1997",PanNumber="CGLBP002"},
-                 new CustomerDetails{CustomerId="DaneilKhan", Name="DK",Address="Dumdum",DateOfBirth="05-09-1997",PanNumber="CGLBP002"},
-                  new CustomerDetails{CustomerId="Shahid", Name="SS",Address="Dumdum",DateOfBirth="05-09-1997",PanNumber="CGLBP002"}
-
-            };
+            
         }
 
         [Test]

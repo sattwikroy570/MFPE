@@ -15,7 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http;
-using AuthenticateMicroservice.Model;
+using AuthenticateMicroservice.Models;
 using AuthenticateMicroservice.Repository;
 using Microsoft.AspNetCore.Authorization;
 

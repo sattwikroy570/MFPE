@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
           }     
       }
     },(err)=>{
-      if(err.error.status = 401){
+      if(err.error.status == 401){
         this.flash.show("Invalid Credentials", { cssClass: 'alert-danger', timeout: 10000 });
       }
       else{          

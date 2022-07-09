@@ -1,4 +1,5 @@
-﻿using AccountMicroservice.Models;
+﻿using AccountMicroservice.DB;
+using AccountMicroservice.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,42 +14,17 @@ namespace AccountMicroservice.Repository
     public class AccountRep : IAccountRep
     {
         static int acid = 203;
-        public AccountRep()
+        AccountDbContext _context;
+        public AccountRep(AccountDbContext context)
         {
+            _context = context;
         }
-        public static List<CustomerAccount> CustomerAccounts = new List<CustomerAccount>()
-        {
-            new CustomerAccount{CustomerId="JhonSmith",CurrentAccountId=201,SavingsAccountId=202}
-        };
-        public static List<Account> Accounts = new List<Account>()
-        {
-            new Account{Id=201,Balance=1000},
-            new Account{Id=202,Balance=500}
-        };
-        public static List<AccountStatement> accountStatements = new List<AccountStatement>()
-        {
-            new AccountStatement{AccountId=202,
-            Statements= new List<Statement>()
-            {
-                new Statement{Date=DateTime.Parse("21/02/2022"),Narration="Withdrawn",Withdrawal=0.00,Deposit=2000.00,ClosingBalance=2000.00},
-                new Statement{Date=DateTime.Parse("27/05/2022"),Narration="Deposited",Withdrawal=1500.00,Deposit=2000.00,ClosingBalance=500.00}
-                }
-            },
-            new AccountStatement{AccountId=201,
-            Statements= new List<Statement>()
-            {
-                new Statement{Date=DateTime.Parse("21/02/2022"),Narration="Deposited",Withdrawal=0.00,Deposit=500.00,ClosingBalance=500.00},
-                new Statement{Date=DateTime.Parse("27/03/2022"),Narration="Deposited",Withdrawal=0.00,Deposit=2000.00,ClosingBalance=2500.00},
-                new Statement{Date=DateTime.Parse("21/06/2022"),Narration="Withdrawn",Withdrawal=1500.00,Deposit=0.00,ClosingBalance=1000.00}
-                }
-            }
-         };
 
         public List<AccountMsg> getCustomerAccounts(string id)
         {
-            var a = CustomerAccounts.Find(c => c.CustomerId == id);
-            var ca = Accounts.Find(cac => cac.Id == a.CurrentAccountId);
-            var sa = Accounts.Find(sac => sac.Id == a.SavingsAccountId);
+            var a = _context.customerAccounts.Where(c => c.CustomerId == id).FirstOrDefault<CustomerAccount>();
+            var ca = _context.accounts.Where(cac => cac.Id == a.CurrentAccountId).FirstOrDefault<Account>();
+            var sa = _context.accounts.Where(sac => sac.Id == a.SavingsAccountId).FirstOrDefault<Account>();
             var ac = new List<AccountMsg>
             {
                 new AccountMsg{AccId=ca.Id,AccType="Current Account",AccBal=ca.Balance},
@@ -64,14 +40,14 @@ namespace AccountMicroservice.Repository
                 CurrentAccountId = acid,
                 SavingsAccountId = (acid + 1)
             };
-            CustomerAccounts.Add(a);
+            _context.customerAccounts.Add(a);
             Account ca = new Account
             {
                 Id = a.CurrentAccountId,
                 Balance = 0.00
             };
-            Accounts.Add(ca);
-            accountStatements.Add(
+            _context.accounts.Add(ca);
+            _context.accountStatements.Add(
                     new AccountStatement
                     {
                         AccountId = ca.Id,
@@ -83,20 +59,21 @@ namespace AccountMicroservice.Repository
                 Id = a.SavingsAccountId,
                 Balance = 0.00
             };
-            Accounts.Add(sa);
+            _context.accounts.Add(sa);
             acid += 2;
-            accountStatements.Add(
+            _context.accountStatements.Add(
                     new AccountStatement
                     {
                         AccountId = sa.Id,
                         Statements = new List<Statement>() { }
                     }
                 );
+            _context.SaveChanges();
             return a;
         }
         public AccountMsg getAccount(int id)
         {
-            var acc = Accounts.Find(a => a.Id == id);
+            var acc = _context.accounts.Where(a => a.Id == id).FirstOrDefault<Account>();
             if(id % 2 != 0)
             {
                 var accMsg = new AccountMsg
@@ -120,7 +97,7 @@ namespace AccountMicroservice.Repository
         }
         public TransactionMsg deposit(Transaction t)
         {
-            var acc = Accounts.Find(a => a.Id == t.AccountId);
+            var acc = _context.accounts.Where(a => a.Id == t.AccountId).FirstOrDefault<Account>();
             acc.Balance = acc.Balance + t.Amount;
             TransactionMsg accMsg = new TransactionMsg
             {
@@ -128,16 +105,22 @@ namespace AccountMicroservice.Repository
                 Message = "Sucessfully Deposited Amount",
                 Balance = acc.Balance
             };
-            var accStatement = accountStatements.Find(a => a.AccountId == t.AccountId);
+            var accStatement = _context.accountStatements.Where(a => a.AccountId == t.AccountId).FirstOrDefault<AccountStatement>();
+            if(accStatement.Statements == null)
+            {
+                accStatement.Statements = new List<Statement>();
+            }
             accStatement.Statements.Add(
                     new Statement { Date = DateTime.Today, Narration = "Deposited", Withdrawal = 0.00,Deposit = t.Amount, ClosingBalance = acc.Balance }
                 );
+
+            _context.SaveChanges();
             return accMsg;
         }
 
         public TransactionMsg withdraw(Transaction t)
         {
-            var acc = Accounts.Find(a => a.Id == t.AccountId);
+            var acc = _context.accounts.Where(a => a.Id == t.AccountId).FirstOrDefault<Account>();
             if (acc.Balance >= t.Amount)
             {
                 acc.Balance = acc.Balance - t.Amount;
@@ -147,10 +130,16 @@ namespace AccountMicroservice.Repository
                     Message = "Sucessfully Withdrawn Amount",
                     Balance = acc.Balance
                 };
-                var accStatement = accountStatements.Find(a => a.AccountId == t.AccountId);
+                var accStatement = _context.accountStatements.Where(a => a.AccountId == t.AccountId).FirstOrDefault<AccountStatement>();
+                if (accStatement.Statements == null)
+                {
+                    accStatement.Statements = new List<Statement>();
+                }
                 accStatement.Statements.Add(
                         new Statement { Date = DateTime.Today, Narration = "Withdrawn", Withdrawal = t.Amount, Deposit = 0.0, ClosingBalance = acc.Balance }
                     );
+
+                _context.SaveChanges();
                 return accMsg;
             }
             else
@@ -166,7 +155,7 @@ namespace AccountMicroservice.Repository
         }
         public List<Statement> getAccountStatement(int AccountId, string from_date, string to_date)
         {
-            var accs = accountStatements.Find(a => a.AccountId == AccountId);
+            var accs = _context.accountStatements.Where(a => a.AccountId == AccountId).FirstOrDefault<AccountStatement>();
             var s = accs.Statements;
             DateTime from = DateTime.ParseExact(from_date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             DateTime to = DateTime.ParseExact(to_date, "yyyy-MM-dd", CultureInfo.InvariantCulture);

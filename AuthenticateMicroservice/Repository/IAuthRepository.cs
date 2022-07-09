@@ -1,4 +1,4 @@
-﻿using AuthenticateMicroservice.Model;
+﻿using AuthenticateMicroservice.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
